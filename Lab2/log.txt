@@ -1,0 +1,29 @@
+commit ee9f3237d20179281417b50ec8e2e7778ba14ada
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Sat Sep 12 02:32:59 2026 +0800
+
+    Screenshots of docker container and python running added
+
+commit 88446363dc18f06ee413d0f8a1fe449e4aec532e
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Sat Sep 12 02:16:12 2026 +0800
+
+    Added inventory cannot exceed 500 quantity logic
+
+commit 5a60275aafcbe6da147ebe9055a3cadb6aebd58d
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Sat Sep 12 01:24:09 2026 +0800
+
+    Smary Inventory Auditor logic
+
+commit 9012e4d426c45be36460302d589adab01f66ea86
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Fri Sep 11 21:39:39 2026 +0800
+
+    Container build and test
+
+commit 79c87518d9736e38bc2f1afbb520b02ccb356fb9
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Fri Sep 11 21:25:13 2026 +0800
+
+    First commit
