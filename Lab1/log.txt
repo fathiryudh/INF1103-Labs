@@ -1,0 +1,29 @@
+commit faac3f166da33357b89b655f1835abeeecf710c9
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Fri Sep 4 15:12:56 2026 +0800
+
+    Fun conditions
+
+commit a42b4d19e5f21646fbf18e7a9c308c1c1207a95a
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Fri Sep 4 15:04:05 2026 +0800
+
+    Added interactive profile creator
+
+commit fe475eecff5486b3415bbbf710ef54c9e03c2a27
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Fri Sep 4 14:47:05 2026 +0800
+
+    Added follower counter
+
+commit 3b17a5bbedd3d871cc287063c4a2c1a250165610
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Fri Sep 4 14:38:50 2026 +0800
+
+    Updated my profile
+
+commit c078f7a2fe3238759add1079c60baf16131b90f5
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Fri Sep 4 14:33:12 2026 +0800
+
+    First Post
