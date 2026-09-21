@@ -1,0 +1,29 @@
+commit ef2a6651e9409aa5ad30e7cf22ddae1b7866b22b
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Tue Sep 22 02:07:47 2026 +0800
+
+    Add Lab 3 Docker screenshots
+
+commit 3e9fe360cac1fdab79a17a54d05428b6304e9ab8
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Tue Sep 22 01:56:34 2026 +0800
+
+    Add Docker config for Lab 3
+
+commit 8000ef65360a90839f0fb7e51a5bb23517c9080d
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Tue Sep 22 01:54:04 2026 +0800
+
+    Refactor inventory auditor into functions
+
+commit 180891bd22ab6fce98f40e0c2a162f3505996fe0
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Tue Sep 22 01:36:56 2026 +0800
+
+    added functions
+
+commit fea4940b1a0829871aa57a9226576738e8b9c758
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Tue Sep 22 01:07:16 2026 +0800
+
+    Week 3 Lab initial codes
