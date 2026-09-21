@@ -34,28 +34,29 @@ deliveries_processed = 0
 rejected_entries = 0
 
 while True:
-    user_input = input("Enter stock quantity for inventory or 'quit': ")
+    quantity, input_failures = get_valid_input()
+    rejected_entries += input_failures
 
-    if user_input.lower() == "quit":
-        print("Total units processed: ", inventory)
-        print("Number of rejected entries: ", rejected_entries)
+    if quantity == "quit":
         break
 
-    if not user_input.isdigit():
-        print("Invalid input. Please enter a whole number.")
+    proposed_total = process_delivery(inventory, quantity)
+
+    if proposed_total > 500:
+        print("Inventory limit exceeded. Overstock!")
         rejected_entries += 1
         continue
 
-    quantity = int(user_input)
+    inventory = proposed_total
+    deliveries_processed += 1
 
-    if inventory + quantity > 500:
-        print("Inventory limit exceeded. Overstock!")
-        rejected_entries += 1
-        break
+    deliveries_tax = calulate_tax(quantity)
 
-    inventory += quantity
+    print("Tax for this delivery: $", format(deliveries_tax, ".2f"))
+    print("Current inverntory count:", inventory)
 
-    print("Current inventory count: ", inventory)
-
-print("Final inventory count: ", inventory)
-print("Number of rejected entries: ", rejected_entries)
+generate_report(
+    inventory,
+    deliveries_processed,
+    rejected_entries
+)
