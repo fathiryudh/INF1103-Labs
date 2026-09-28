@@ -9,6 +9,7 @@ def display_orders(orders):
     print("Current Orders: \n")
     for items in orders:
         print(items.strip())
+    print()
 
 def get_order_details():
     product_name = input("Enter Product Name: ")
@@ -35,11 +36,14 @@ def save_order(order):
     inventory_file.write(order + "\n")
     inventory_file.close()
 
+    print("\nNew Order Added:")
+    print(new_order)
+    print("\nOrder successfully saced to inventory.txt")
 
 orders = load_orders()
 next_order_id = get_next_order_id(orders)
 display_orders(orders)
 product_name, quantity = get_order_details()
-new_order = str(next_order_id) + "," + product_name + "," + str(quantity)
+new_order = str(next_order_id) + ", " + product_name + ", " + str(quantity)
 save_order(new_order)
 
