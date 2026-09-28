@@ -67,6 +67,7 @@ while True:
         continue
 
     inventory = proposed_total
+    transaction_history.append(quantity)
     deliveries_processed += 1
 
     deliveries_tax = calulate_tax(quantity)
