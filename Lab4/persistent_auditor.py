@@ -29,7 +29,26 @@ def generate_report(total_units, deliveries_processed, failed_attempts):
     print("Total deliveries processed: ", deliveries_processed)
     print("Number of failed/rejected entries: ", failed_attempts)
 
-inventory = 0
+def load_inventory():
+    inventory_file = open("inventory.txt", "a")
+    inventory_file.close()
+
+    inventory_file = open("inventory.txt", "r")
+    saved_data = inventory_file.readlines()
+    inventory_file.close()
+
+    if len(saved_data) == 0:
+        return 0, []
+
+    saved_total = int(saved_data[0].strip())
+    saved_history = []
+
+    for line in saved_data[1:]:
+        saved_history.append(int(line.strip()))
+
+    return saved_total, saved_history
+
+inventory, transaction_history = load_inventory()
 deliveries_processed = 0
 rejected_entries = 0
 
