@@ -1,92 +1,45 @@
-def get_valid_input():
-    failed_attempts = 0
+def load_orders():
+    orders_file = open("inventory.txt", "r")
+    orders = orders_file.readlines()
+    orders_file.close()
 
-    while True:
-        user_input = input(
-            "Enter stock quantity for inventory or 'quit': "
-        ).strip()
+    return orders
 
-        if user_input.lower() == "quit":
-            return "quit", failed_attempts
+def display_orders(orders):
+    print("Current Orders: \n")
+    for items in orders:
+        print(items.strip())
 
-        if user_input.isdigit():
-            return int(user_input), failed_attempts
+def get_order_details():
+    product_name = input("Enter Product Name: ")
+    quantity = int(input("Enter Quantity: "))
 
-        print("Invalid input. Please enter a whole number.")
-        failed_attempts += 1
+    return product_name, quantity
 
-def process_delivery(current_total, new_value):
-    new_total = current_total + new_value
-    return new_total
+def get_next_order_id(orders):
+    highest_id = 0
 
-def calulate_tax(amount):
-    tax = amount * 0.10
-    return tax
+    for order in orders:
+        if order.strip() == "":
+            continue
+        order_parts = order.strip().split(",") 
+        current_id = int(order_parts[0].strip())
 
-def generate_report(total_units, deliveries_processed, failed_attempts):
-    print("\nFinal Report:")
-    print("Total inventory units processed: ", total_units)
-    print("Total deliveries processed: ", deliveries_processed)
-    print("Number of failed/rejected entries: ", failed_attempts)
+        if current_id > highest_id:
+            highest_id = current_id
+            
+    return highest_id + 1
 
-def load_inventory():
+def save_order(order):
     inventory_file = open("inventory.txt", "a")
+    inventory_file.write(order + "\n")
     inventory_file.close()
 
-    inventory_file = open("inventory.txt", "r")
-    saved_data = inventory_file.readlines()
-    inventory_file.close()
 
-    if len(saved_data) == 0:
-        return 0, []
+orders = load_orders()
+next_order_id = get_next_order_id(orders)
+display_orders(orders)
+product_name, quantity = get_order_details()
+new_order = str(next_order_id) + "," + product_name + "," + str(quantity)
+save_order(new_order)
 
-    saved_total = int(saved_data[0].strip())
-    saved_history = []
-
-    for line in saved_data[1:]:
-        saved_history.append(int(line.strip()))
-
-    return saved_total, saved_history
-
-def save_inventory(total, transaction_history):
-    inventory_file = open("inventory.txt", "w")
-    inventory_file.write(str(total) + "\n")
-
-    for transaction in transaction_history:
-        inventory_file.write(str(transaction) + "\n")
-
-    inventory_file.close()
-
-inventory, transaction_history = load_inventory()
-deliveries_processed = 0
-rejected_entries = 0
-
-while True:
-    quantity, input_failures = get_valid_input()
-    rejected_entries += input_failures
-
-    if quantity == "quit":
-        save_inventory(inventory, transaction_history)
-        break
-
-    proposed_total = process_delivery(inventory, quantity)
-
-    if proposed_total > 500:
-        print("Inventory limit exceeded. Overstock!")
-        rejected_entries += 1
-        continue
-
-    inventory = proposed_total
-    transaction_history.append(quantity)
-    deliveries_processed += 1
-
-    deliveries_tax = calulate_tax(quantity)
-
-    print("Tax for this delivery: $", format(deliveries_tax, ".2f"))
-    print("Current inverntory count:", inventory)
-
-generate_report(
-    inventory,
-    deliveries_processed,
-    rejected_entries
-)
