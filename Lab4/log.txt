@@ -1,0 +1,41 @@
+commit 24528f084db02cb6feb63deaf3b9b48ff46524bc
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Mon Sep 28 17:50:18 2026 +0800
+
+    Added Dockerfile config
+
+commit ffee75d5bf5542949b321199d5a45b9bd3cfa76f
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Mon Sep 28 17:48:02 2026 +0800
+
+    Completed order workflow
+
+commit b67c309f601f8733e39455bc65d2aed71ece2d07
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Mon Sep 28 17:29:48 2026 +0800
+
+    Redid code, replaced auditor with persistent order codes - Load and Save inventory orders
+
+commit f3c0f82511e42d54d2ed8dfff483eeb855871daf
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Mon Sep 28 15:08:21 2026 +0800
+
+    Save inventory and transaction history added
+
+commit ef62d1d20c3b6892186b08974618f1c725c80285
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Mon Sep 28 14:54:44 2026 +0800
+
+    Track transaction history
+
+commit 3504d9e9b52ac399bc76d3de31ccbc37b38a262f
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Mon Sep 28 14:49:56 2026 +0800
+
+    Added inventory loading function
+
+commit 752e88dcdf39aa49aaba7550c8320456e0e5a7aa
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Sun Sep 27 16:38:39 2026 +0800
+
+    Lab 4 initialise

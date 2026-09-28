@@ -37,8 +37,8 @@ def save_order(order):
     inventory_file.close()
 
     print("\nNew Order Added:")
-    print(new_order)
-    print("\nOrder successfully saced to inventory.txt")
+    print(order)
+    print("\nOrder successfully saved to inventory.txt")
 
 orders = load_orders()
 next_order_id = get_next_order_id(orders)

@@ -3,3 +3,4 @@
 1003, USB Cable, 3
 1004, Monitor, 2
 1005, Monitor Arm, 1
+1006, Custom PC, 1
