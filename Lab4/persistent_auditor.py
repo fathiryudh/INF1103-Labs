@@ -48,6 +48,15 @@ def load_inventory():
 
     return saved_total, saved_history
 
+def save_inventory(total, transaction_history):
+    inventory_file = open("inventory.txt", "w")
+    inventory_file.write(str(total) + "\n")
+
+    for transaction in transaction_history:
+        inventory_file.write(str(transaction) + "\n")
+
+    inventory_file.close()
+
 inventory, transaction_history = load_inventory()
 deliveries_processed = 0
 rejected_entries = 0
@@ -57,6 +66,7 @@ while True:
     rejected_entries += input_failures
 
     if quantity == "quit":
+        save_inventory(inventory, transaction_history)
         break
 
     proposed_total = process_delivery(inventory, quantity)
