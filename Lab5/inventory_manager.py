@@ -1,8 +1,22 @@
-inventory = [
-    {"id": "P001", "name": "Laptop", "price": 1200.00, "stock": 15},
-    {"id": "P002", "name": "Mouse", "price": 25.50, "stock": 40},
-    {"id": "P003", "name": "Keyboard", "price": 45.00, "stock": 25},
-]
+import json
+import os
+
+
+INVENTORY_FILE = "inventory.json"
+inventory = []
+
+
+def load_inventory():
+    global inventory
+
+    if os.path.exists(INVENTORY_FILE):
+        print(f"{INVENTORY_FILE} found.")
+        with open(INVENTORY_FILE, "r") as file:
+            inventory = json.load(file)
+        print("Inventory loaded successfully.")
+    else:
+        inventory = []
+        print(f"{INVENTORY_FILE} not found. Starting with an empty inventory.")
 
 
 def display_all():
@@ -18,4 +32,5 @@ def display_all():
     print("-" * 48)
 
 
+load_inventory()
 display_all()
