@@ -1,0 +1,23 @@
+commit 87285650c615d0ea097c253649ceffe1f2eef8e3
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Thu Oct 8 20:21:46 2026 +0800
+
+    Lab 5: add Docker configuration
+
+commit a052a537260ec7c99eb30fae93d3bd4bdb340dfa
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Thu Oct 8 20:21:14 2026 +0800
+
+    Lab 5: complete menu and verify inventory saving
+
+commit 079370a171d6f2c535142c881b236fe15070274c
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Thu Oct 8 20:20:06 2026 +0800
+
+    Lab 5: load inventory from JSON
+
+commit f311e3f504a45ecb71cf4079f9193c3f682188cf
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Thu Oct 8 20:16:21 2026 +0800
+
+    Lab 5: create inventory dictionary and products
