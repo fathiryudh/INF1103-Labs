@@ -1,0 +1,35 @@
+commit 8d1e0a498586967719d310d50c0e60f9cd78fd22
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Thu Oct 29 23:00:17 2026 +0800
+
+    Lab 6: add UML class diagram
+
+commit 2b1b50171f47c48780011bb54d54f16c7444dca5
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Thu Oct 29 23:00:05 2026 +0800
+
+    Lab 6: add Docker setup
+
+commit 7e9c2ff19b876c088951a05cc165be1fd53b51df
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Thu Oct 29 22:59:56 2026 +0800
+
+    Lab 6: add inventory data file
+
+commit 6e13d27768071f7213cf1e33b977dd4f4f925868
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Thu Oct 29 22:58:35 2026 +0800
+
+    Lab 6: connect OOP inventory to menu and JSON
+
+commit d75d40b5242ec1a41117e04a408b582d23bd8609
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Thu Oct 29 22:58:08 2026 +0800
+
+    Lab 6: create Inventory class
+
+commit cd5c40437c1b07270c7af33480e8bdecfeb8ea35
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Thu Oct 29 22:53:04 2026 +0800
+
+    Lab 6: create Product class
