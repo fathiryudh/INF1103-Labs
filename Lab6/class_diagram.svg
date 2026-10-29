@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="430" viewBox="0 0 760 430">
+  <style>
+    text { font-family: Arial, sans-serif; fill: #172033; }
+    .title { font-size: 24px; font-weight: 700; }
+    .head { font-size: 18px; font-weight: 700; }
+    .body { font-size: 15px; }
+    .box { fill: #fff; stroke: #334155; stroke-width: 2; }
+    .line { stroke: #334155; stroke-width: 2; fill: none; }
+  </style>
+  <text x="380" y="38" text-anchor="middle" class="title">Lab 6 Inventory System — UML Class Diagram</text>
+  <rect x="70" y="100" width="280" height="260" rx="4" class="box"/>
+  <path d="M70 145 H350 M70 275 H350" class="line"/>
+  <text x="210" y="130" text-anchor="middle" class="head">Product</text>
+  <text x="90" y="175" class="body">- __product_id: String</text>
+  <text x="90" y="200" class="body">- __name: String</text>
+  <text x="90" y="225" class="body">- __price: float</text>
+  <text x="90" y="250" class="body">- __stock: int</text>
+  <text x="90" y="305" class="body">+ update_stock(quantity: int): void</text>
+  <text x="90" y="332" class="body">+ display_information(): void</text>
+  <rect x="420" y="100" width="280" height="260" rx="4" class="box"/>
+  <path d="M420 145 H700 M420 205 H700" class="line"/>
+  <text x="560" y="130" text-anchor="middle" class="head">Inventory</text>
+  <text x="440" y="180" class="body">- products: Product list</text>
+  <text x="440" y="235" class="body">+ add_product(product): bool</text>
+  <text x="440" y="262" class="body">+ search_product(id): Product</text>
+  <text x="440" y="289" class="body">+ display_all(): void</text>
+  <path d="M420 330 H350" class="line"/>
+  <path d="M350 330 l12 -7 v14 z" fill="#334155"/>
+  <text x="385" y="320" text-anchor="middle" class="body">0..*</text>
+  <text x="385" y="355" text-anchor="middle" class="body">manages</text>
+  <text x="380" y="400" text-anchor="middle" class="body">Main program handles menu input and JSON file loading/saving.</text>
+</svg>
