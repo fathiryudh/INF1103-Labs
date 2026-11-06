@@ -1,8 +1,9 @@
 import json
 import os
+import math
 
 from inventory import Inventory
-from product import Product
+from product import DigitalProduct, PhysicalProduct
 
 INVENTORY_FILE = "inventory.json"
 
@@ -14,27 +15,35 @@ def load_inventory(inventory):
 
     with open(INVENTORY_FILE, "r") as file:
         for item in json.load(file):
-            inventory.add_product(
-                Product(item["id"], item["name"], item["price"], item["stock"])
-            )
+            if item["type"] == "physical":
+                product = PhysicalProduct(item["id"], item["name"], item["price"], item["stock"], item["weight"])
+            elif item["type"] == "digital":
+                product = DigitalProduct(item["id"], item["name"], item["price"], item["stock"], item["download_size"])
+            else:
+                raise ValueError(f"Unknown product type: {item['type']}")
+            if not inventory.add_product(product):
+                raise ValueError(f"Duplicate product ID: {product.product_id}")
     print(f"{INVENTORY_FILE} loaded successfully.")
 
 
 def save_inventory(inventory):
+    items = []
+    for product in inventory.products:
+        item = {
+            "id": product.product_id,
+            "name": product.name,
+            "price": product.price,
+            "stock": product.stock,
+        }
+        if isinstance(product, PhysicalProduct):
+            item.update(type="physical", weight=product.weight)
+        elif isinstance(product, DigitalProduct):
+            item.update(type="digital", download_size=product.download_size)
+        else:
+            raise ValueError("Unknown product type")
+        items.append(item)
     with open(INVENTORY_FILE, "w") as file:
-        json.dump(
-            [
-                {
-                    "id": product.product_id,
-                    "name": product.name,
-                    "price": product.price,
-                    "stock": product.stock,
-                }
-                for product in inventory.products
-            ],
-            file,
-            indent=4,
-        )
+        json.dump(items, file, indent=4)
 
 
 def display_product(product):
@@ -51,18 +60,27 @@ def add_product(inventory):
         print("\nA product with this ID already exists.")
         return
 
+    product_type = input("Product type (physical/digital): ").strip().lower()
+    if product_type not in ("physical", "digital"):
+        print("\nInvalid product type.")
+        return
     name = input("Product Name: ").strip()
     try:
         price = float(input("Price: "))
         stock = int(input("Stock Quantity: "))
+        if product_type == "physical":
+            extra = float(input("Weight (kg): "))
+        else:
+            extra = float(input("Download size (MB): "))
     except ValueError:
-        print("\nInvalid price or stock quantity.")
+        print("\nInvalid numeric value.")
         return
-    if not product_id or not name or price < 0 or stock < 0:
+    if not product_id or not name or not math.isfinite(price) or not math.isfinite(extra) or price < 0 or stock < 0 or extra < 0:
         print("\nProduct details must be valid and non-negative.")
         return
 
-    inventory.add_product(Product(product_id, name, price, stock))
+    product_class = PhysicalProduct if product_type == "physical" else DigitalProduct
+    inventory.add_product(product_class(product_id, name, price, stock, extra))
     print("\nProduct added successfully!")
 
 
