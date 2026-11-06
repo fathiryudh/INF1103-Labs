@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="700" viewBox="0 0 1120 700">
+ <style>text{font-family:Arial,sans-serif;fill:#172033}.title{font-size:24px;font-weight:bold}.head{font-size:18px;font-weight:bold}.body{font-size:15px}.box{fill:white;stroke:#334155;stroke-width:2}.line{fill:none;stroke:#334155;stroke-width:2}.dash{stroke-dasharray:8 5}</style>
+ <text x="560" y="38" text-anchor="middle" class="title">Lab 7 Inventory System — UML Class Diagram</text>
+ <rect x="320" y="75" width="340" height="270" class="box"/><path d="M320 135 H660 M320 235 H660" class="line"/>
+ <text x="490" y="100" text-anchor="middle" class="body">&lt;&lt;abstract&gt;&gt;</text><text x="490" y="123" text-anchor="middle" class="head">Product</text>
+ <text x="335" y="160" class="body">- __product_id: str</text><text x="335" y="181" class="body">- __name: str</text><text x="335" y="202" class="body">- __price: float</text><text x="335" y="223" class="body">- __stock: int</text>
+ <text x="335" y="260" class="body">+ update_stock(quantity: int)</text><text x="335" y="284" class="body">+ display_information()</text><text x="335" y="308" class="body">+ get_fulfilment_info() &lt;&lt;abstract&gt;&gt;</text>
+ <rect x="745" y="100" width="315" height="145" class="box"/><path d="M745 160 H1060 M745 195 H1060" class="line"/><text x="902" y="126" text-anchor="middle" class="head">Inventory</text><text x="760" y="184" class="body">+ products: list[Product]</text><text x="760" y="218" class="body">+ add_product / search / display_all</text>
+ <path d="M745 210 H660" class="line"/><text x="703" y="201" text-anchor="middle" class="body">0..*</text>
+ <rect x="25" y="410" width="340" height="205" class="box"/><path d="M25 470 H365 M25 505 H365" class="line"/><text x="195" y="435" text-anchor="middle" class="body">&lt;&lt;interface&gt;&gt; &lt;&lt;abstract&gt;&gt;</text><text x="195" y="458" text-anchor="middle" class="head">CanBeShipped</text><text x="40" y="535" class="body">+ calculate_shipping_cost()</text><text x="40" y="557" class="body">  &lt;&lt;abstract&gt;&gt;</text>
+ <rect x="415" y="430" width="320" height="185" class="box"/><path d="M415 470 H735 M415 505 H735" class="line"/><text x="575" y="457" text-anchor="middle" class="head">PhysicalProduct</text><text x="430" y="493" class="body">+ weight: float</text><text x="430" y="530" class="body">+ display_information()</text><text x="430" y="554" class="body">+ get_fulfilment_info()</text><text x="430" y="578" class="body">+ calculate_shipping_cost()</text>
+ <rect x="780" y="430" width="305" height="185" class="box"/><path d="M780 470 H1085 M780 505 H1085" class="line"/><text x="932" y="457" text-anchor="middle" class="head">DigitalProduct</text><text x="795" y="493" class="body">+ download_size: float</text><text x="795" y="530" class="body">+ display_information()</text><text x="795" y="554" class="body">+ get_fulfilment_info()</text>
+ <path d="M575 430 V365" class="line"/><path d="M575 345 L565 365 H585 Z" fill="white" stroke="#334155" stroke-width="2"/>
+ <path d="M932 430 V385 H630 V365" class="line"/><path d="M630 345 L620 365 H640 Z" fill="white" stroke="#334155" stroke-width="2"/>
+ <path d="M415 530 H385" class="line dash"/><path d="M365 530 L385 520 V540 Z" fill="white" stroke="#334155" stroke-width="2"/>
+ <text x="560" y="665" text-anchor="middle" class="body">Inventory manages products; the main program handles user input and JSON persistence.</text>
+</svg>
