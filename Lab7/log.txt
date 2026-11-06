@@ -1,0 +1,29 @@
+commit 155f7b4d7d94811fd7ce2d5a503a74e74fd916f2
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Fri Nov 6 18:36:31 2026 +0800
+
+    Lab 7: add Git and Docker evidence screenshots
+
+commit 08b61cc09b7e2c33b355a68b0555a07f867c990f
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Fri Nov 6 18:29:35 2026 +0800
+
+    Lab 7: document class relationships and Docker tests
+
+commit a07b646bbf4f3347d9aa3bcd5ff87506c69614fb
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Fri Nov 6 18:24:04 2026 +0800
+
+    Lab 7: integrate product types and JSON persistence
+
+commit 59e13a2e6a3347760397deccd4c2df1edd06e88f
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Fri Nov 6 18:20:33 2026 +0800
+
+    Lab 7: add abstract product types and shipping interface
+
+commit a44ce3735046f43bc0484e7ca6463a4fe769e0c0
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Fri Nov 6 18:15:02 2026 +0800
+
+    Lab 7: start from Lab 6 inventory system
