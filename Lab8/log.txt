@@ -1,0 +1,35 @@
+commit 0487c69546d47990245041a6ea601a01ce2491a1
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Thu Nov 12 16:33:05 2026 +0800
+
+    Lab 8: document design and type annotations
+
+commit d88011f975312043b94f0990bb289bf55cdb29e7
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Thu Nov 12 16:21:19 2026 +0800
+
+    Lab 8: test relationships and polymorphism
+
+commit 03d24ea03c4c025a0ffaf1cc267f982849dd9096
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Thu Nov 12 16:18:28 2026 +0800
+
+    Lab 8: create orders with owned order lines
+
+commit 2486c78f81e212c81d78565af3d6c843e4e66926
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Thu Nov 12 16:09:45 2026 +0800
+
+    Lab 8: support product transfer between inventories
+
+commit 307daa8aa47f3cdee2198f22c6637c06611fdbd8
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Thu Nov 12 16:07:48 2026 +0800
+
+    Lab 8: associate products with suppliers
+
+commit 53fa88a1cae49a0aaa524c3cec0b387422402d02
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Thu Nov 12 16:05:47 2026 +0800
+
+    Lab 8: start from Lab 7 inventory system
