@@ -1,10 +1,28 @@
-commit 0487c69546d47990245041a6ea601a01ce2491a1
+commit e856e157a02158ce5c22d32fbd0e461ce0ee0268
 Author: Fathir Yudhistira <fathiryudh03@gmail.com>
-Date:   Thu Nov 12 16:33:05 2026 +0800
+Date:   Fri Nov 13 01:21:15 2026 +0800
 
-    Lab 8: document design and type annotations
+    Lab 8: add predict-first answers
 
-commit d88011f975312043b94f0990bb289bf55cdb29e7
+commit 01339e6457c6b14e536810eac5e84f9b99805a7f
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Fri Nov 13 00:52:42 2026 +0800
+
+    Lab 8: separate order line class
+
+commit 3ebc88f139332141dd9feb9346328774f58607ff
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Fri Nov 13 00:49:41 2026 +0800
+
+    Lab 8: split product hierarchy into separate files
+
+commit b4c0c8e37bfcaa67b878d460d8211d067706b875
+Author: Fathir Yudhistira <fathiryudh03@gmail.com>
+Date:   Thu Nov 12 16:43:10 2026 +0800
+
+    Lab 8: add Docker and Git evidence
+
+commit c23de26ee7ea30417eaf7c068f8cfabd93ddf946
 Author: Fathir Yudhistira <fathiryudh03@gmail.com>
 Date:   Thu Nov 12 16:21:19 2026 +0800
 
