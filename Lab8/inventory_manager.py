@@ -62,7 +62,7 @@ def display_product(product):
 def add_product(inventory):
     print("\nAdd New Product")
     product_id = input("Product ID: ").strip().upper()
-    if inventory.search_product(product_id):
+    if inventory.find_product(product_id):
         print("\nA product with this ID already exists.")
         return
 
@@ -95,7 +95,7 @@ def add_product(inventory):
 
 def update_stock(inventory):
     print("\nUpdate Stock")
-    product = inventory.search_product(input("Enter Product ID: ").strip().upper())
+    product = inventory.find_product(input("Enter Product ID: ").strip().upper())
     if not product:
         print("\nProduct not found.")
         return
@@ -110,7 +110,7 @@ def update_stock(inventory):
 
 
 def search_product(inventory):
-    product = inventory.search_product(input("\nEnter Product ID: ").strip().upper())
+    product = inventory.find_product(input("\nEnter Product ID: ").strip().upper())
     if product:
         display_product(product)
     else:

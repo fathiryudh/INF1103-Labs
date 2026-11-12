@@ -1,20 +1,27 @@
-class Inventory:
-    def __init__(self):
-        self.products = []
+from product import Product
 
-    def add_product(self, product):
-        if self.search_product(product.product_id):
+
+class Inventory:
+    def __init__(self) -> None:
+        self.products: list[Product] = []
+
+    def add_product(self, product: Product) -> bool:
+        if self.find_product(product.product_id):
             return False
         self.products.append(product)
         return True
 
-    def search_product(self, product_id):
-        return next(
-            (product for product in self.products if product.product_id == product_id),
-            None,
-        )
+    def find_product(self, product_id: str) -> Product | None:
+        return next((product for product in self.products if product.product_id == product_id), None)
 
-    def display_all(self):
+    def remove_product(self, product_id: str) -> bool:
+        product = self.find_product(product_id)
+        if product is None:
+            return False
+        self.products.remove(product)
+        return True
+
+    def display_all(self) -> None:
         print("\nCurrent Inventory")
         print("-" * 48)
         if not self.products:
