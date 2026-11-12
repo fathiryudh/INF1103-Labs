@@ -4,13 +4,13 @@ import math
 
 from inventory import Inventory
 from order import Order
-from product import DigitalProduct, PhysicalProduct
+from product import DigitalProduct, PhysicalProduct, Product
 from supplier import Supplier
 
 INVENTORY_FILE = "inventory.json"
 
 
-def load_inventory(inventory):
+def load_inventory(inventory: Inventory) -> None:
     if not os.path.exists(INVENTORY_FILE):
         print(f"{INVENTORY_FILE} not found. Starting with an empty inventory.")
         return
@@ -30,7 +30,7 @@ def load_inventory(inventory):
     print(f"{INVENTORY_FILE} loaded successfully.")
 
 
-def save_inventory(inventory):
+def save_inventory(inventory: Inventory) -> None:
     items = []
     for product in inventory.products:
         item = {
@@ -52,7 +52,7 @@ def save_inventory(inventory):
         json.dump(items, file, indent=4)
 
 
-def display_product(product):
+def display_product(product: Product) -> None:
     print("\nProduct Found")
     print("-" * 48)
     product.display_information()
@@ -60,7 +60,7 @@ def display_product(product):
     print("-" * 48)
 
 
-def add_product(inventory):
+def add_product(inventory: Inventory) -> None:
     print("\nAdd New Product")
     product_id = input("Product ID: ").strip().upper()
     if inventory.find_product(product_id):
@@ -94,7 +94,7 @@ def add_product(inventory):
     print("\nProduct added successfully!")
 
 
-def update_stock(inventory):
+def update_stock(inventory: Inventory) -> None:
     print("\nUpdate Stock")
     product = inventory.find_product(input("Enter Product ID: ").strip().upper())
     if not product:
@@ -110,7 +110,7 @@ def update_stock(inventory):
     print("\nStock updated successfully!")
 
 
-def search_product(inventory):
+def search_product(inventory: Inventory) -> None:
     product = inventory.find_product(input("\nEnter Product ID: ").strip().upper())
     if product:
         display_product(product)
@@ -138,14 +138,14 @@ def create_order(inventory: Inventory) -> None:
     print(f"Total: ${order.calculate_total():.2f}")
 
 
-def display_menu():
+def display_menu() -> None:
     print("\n----------- MENU -----------")
     print("1. Display All Products\n2. Add Product\n3. Update Stock")
     print("4. Search Product\n5. Save Inventory\n6. Exit\n7. Create Order")
     print("----------------------------")
 
 
-def main():
+def main() -> None:
     print("=" * 40)
     print("INVENTORY MANAGEMENT SYSTEM")
     print("=" * 40)
