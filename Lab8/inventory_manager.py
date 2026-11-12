@@ -3,6 +3,7 @@ import os
 import math
 
 from inventory import Inventory
+from order import Order
 from product import DigitalProduct, PhysicalProduct
 from supplier import Supplier
 
@@ -117,10 +118,30 @@ def search_product(inventory):
         print("\nProduct not found.")
 
 
+def create_order(inventory: Inventory) -> None:
+    order = Order(input("Order ID: ").strip())
+    while True:
+        product_id = input("Product ID (blank to finish): ").strip().upper()
+        if not product_id:
+            break
+        product = inventory.find_product(product_id)
+        if product is None:
+            print("Product not found.")
+            continue
+        try:
+            order.add_order_line(product, int(input("Quantity: ")))
+        except ValueError:
+            print("Enter a positive whole number.")
+    print(f"\nOrder {order.order_id}")
+    for line in order.order_lines:
+        print(f"{line.product.name} x {line.quantity}: ${line.calculate_subtotal():.2f}")
+    print(f"Total: ${order.calculate_total():.2f}")
+
+
 def display_menu():
     print("\n----------- MENU -----------")
     print("1. Display All Products\n2. Add Product\n3. Update Stock")
-    print("4. Search Product\n5. Save Inventory\n6. Exit")
+    print("4. Search Product\n5. Save Inventory\n6. Exit\n7. Create Order")
     print("----------------------------")
 
 
@@ -136,6 +157,7 @@ def main():
         "2": lambda: add_product(inventory),
         "3": lambda: update_stock(inventory),
         "4": lambda: search_product(inventory),
+        "7": lambda: create_order(inventory),
     }
     while True:
         display_menu()
@@ -150,7 +172,7 @@ def main():
             print("\nInventory saved. Thank you for using Inventory Management System.")
             break
         else:
-            print("\nInvalid option. Please enter a number from 1 to 6.")
+            print("\nInvalid option. Please enter a number from 1 to 7.")
 
 
 if __name__ == "__main__":
