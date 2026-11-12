@@ -8,7 +8,9 @@ from unittest.mock import patch
 from inventory import Inventory
 from inventory_manager import load_inventory, save_inventory
 from order import Order
-from product import DigitalProduct, PhysicalProduct, Product
+from digital_product import DigitalProduct
+from physical_product import PhysicalProduct
+from product import Product
 from supplier import Supplier
 
 

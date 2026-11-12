@@ -4,7 +4,9 @@ import math
 
 from inventory import Inventory
 from order import Order
-from product import DigitalProduct, PhysicalProduct, Product
+from digital_product import DigitalProduct
+from physical_product import PhysicalProduct
+from product import Product
 from supplier import Supplier
 
 INVENTORY_FILE = "inventory.json"

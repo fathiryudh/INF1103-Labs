@@ -41,38 +41,3 @@ class Product(ABC):
     @abstractmethod
     def get_fulfilment_info(self) -> str:
         pass
-
-
-class CanBeShipped(ABC):
-    @abstractmethod
-    def calculate_shipping_cost(self) -> float:
-        pass
-
-
-class PhysicalProduct(Product, CanBeShipped):
-    def __init__(self, product_id: str, name: str, price: float, stock: int, supplier: Supplier, weight: float) -> None:
-        super().__init__(product_id, name, price, stock, supplier)
-        self.weight = weight
-
-    def display_information(self) -> None:
-        super().display_information()
-        print(f"Weight: {self.weight} kg")
-
-    def get_fulfilment_info(self) -> str:
-        return "Requires physical shipping."
-
-    def calculate_shipping_cost(self) -> float:
-        return self.weight * 5
-
-
-class DigitalProduct(Product):
-    def __init__(self, product_id: str, name: str, price: float, stock: int, supplier: Supplier, download_size: float) -> None:
-        super().__init__(product_id, name, price, stock, supplier)
-        self.download_size = download_size
-
-    def display_information(self) -> None:
-        super().display_information()
-        print(f"Download size: {self.download_size} MB")
-
-    def get_fulfilment_info(self) -> str:
-        return "Delivered digitally."
