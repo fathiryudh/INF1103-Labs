@@ -4,6 +4,7 @@ import math
 
 from inventory import Inventory
 from product import DigitalProduct, PhysicalProduct
+from supplier import Supplier
 
 INVENTORY_FILE = "inventory.json"
 
@@ -15,10 +16,12 @@ def load_inventory(inventory):
 
     with open(INVENTORY_FILE, "r") as file:
         for item in json.load(file):
+            supplier_data = item.get("supplier", {"id": "UNKNOWN", "name": "Unknown", "contact_email": ""})
+            supplier = Supplier(supplier_data["id"], supplier_data["name"], supplier_data["contact_email"])
             if item["type"] == "physical":
-                product = PhysicalProduct(item["id"], item["name"], item["price"], item["stock"], item["weight"])
+                product = PhysicalProduct(item["id"], item["name"], item["price"], item["stock"], supplier, item["weight"])
             elif item["type"] == "digital":
-                product = DigitalProduct(item["id"], item["name"], item["price"], item["stock"], item["download_size"])
+                product = DigitalProduct(item["id"], item["name"], item["price"], item["stock"], supplier, item["download_size"])
             else:
                 raise ValueError(f"Unknown product type: {item['type']}")
             if not inventory.add_product(product):
@@ -34,6 +37,8 @@ def save_inventory(inventory):
             "name": product.name,
             "price": product.price,
             "stock": product.stock,
+            "supplier": {"id": product.supplier.supplier_id, "name": product.supplier.name,
+                         "contact_email": product.supplier.contact_email},
         }
         if isinstance(product, PhysicalProduct):
             item.update(type="physical", weight=product.weight)
@@ -50,6 +55,7 @@ def display_product(product):
     print("\nProduct Found")
     print("-" * 48)
     product.display_information()
+    product.supplier.display_information()
     print("-" * 48)
 
 
@@ -65,6 +71,9 @@ def add_product(inventory):
         print("\nInvalid product type.")
         return
     name = input("Product Name: ").strip()
+    supplier_id = input("Supplier ID: ").strip()
+    supplier_name = input("Supplier Name: ").strip()
+    supplier_email = input("Supplier Email: ").strip()
     try:
         price = float(input("Price: "))
         stock = int(input("Stock Quantity: "))
@@ -75,12 +84,12 @@ def add_product(inventory):
     except ValueError:
         print("\nInvalid numeric value.")
         return
-    if not product_id or not name or not math.isfinite(price) or not math.isfinite(extra) or price < 0 or stock < 0 or extra < 0:
+    if not product_id or not name or not supplier_id or not supplier_name or not supplier_email or not math.isfinite(price) or not math.isfinite(extra) or price < 0 or stock < 0 or extra < 0:
         print("\nProduct details must be valid and non-negative.")
         return
 
     product_class = PhysicalProduct if product_type == "physical" else DigitalProduct
-    inventory.add_product(product_class(product_id, name, price, stock, extra))
+    inventory.add_product(product_class(product_id, name, price, stock, Supplier(supplier_id, supplier_name, supplier_email), extra))
     print("\nProduct added successfully!")
 
 
