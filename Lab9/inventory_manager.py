@@ -1,5 +1,5 @@
+import csv
 import json
-import os
 import math
 
 from inventory import Inventory
@@ -14,11 +14,13 @@ INVENTORY_FILE = "inventory.json"
 
 
 def load_inventory(inventory: Inventory) -> None:
-    if not os.path.exists(INVENTORY_FILE):
+    try:
+        file = open(INVENTORY_FILE, encoding="utf-8")
+    except FileNotFoundError:
         print(f"{INVENTORY_FILE} not found. Starting with an empty inventory.")
         return
 
-    with open(INVENTORY_FILE, "r") as file:
+    with file:
         for item in json.load(file):
             supplier_data = item.get("supplier", {"id": "UNKNOWN", "name": "Unknown", "contact_email": ""})
             supplier = Supplier(supplier_data["id"], supplier_data["name"], supplier_data["contact_email"])
@@ -29,6 +31,33 @@ def load_inventory(inventory: Inventory) -> None:
             if not inventory.add_product(product):
                 raise ValueError(f"Duplicate product ID: {product.product_id}")
     print(f"{INVENTORY_FILE} loaded successfully.")
+
+
+def load_products(path: str, inventory: Inventory, supplier: Supplier) -> None:
+    try:
+        file = open(path, newline="", encoding="utf-8")
+    except FileNotFoundError:
+        print(f"Products file not found: {path}")
+    except OSError as error:
+        print(f"Could not open products file: {error.strerror}")
+    else:
+        loaded = 0
+        with file:
+            rows = csv.reader(file)
+            next(rows, None)
+            for row_number, row in enumerate(rows, start=2):
+                try:
+                    product_type, product_id, name, price, stock = row
+                    product = ProductFactory.create(product_type, product_id, name, float(price), int(stock), supplier)
+                    if not inventory.add_product(product):
+                        raise ValueError(f"Duplicate product ID: {product.product_id}")
+                except ValueError as error:
+                    print(f"Row {row_number} skipped: {error}")
+                else:
+                    loaded += 1
+        print(f"{loaded} products loaded.")
+    finally:
+        print("Load attempt finished.")
 
 
 def save_inventory(inventory: Inventory) -> None:
@@ -61,6 +90,18 @@ def display_product(product: Product) -> None:
     print("-" * 48)
 
 
+def get_positive_float(prompt: str) -> float:
+    while True:
+        try:
+            value = float(input(prompt))
+        except ValueError:
+            print("Please enter a valid number, e.g. 12.50")
+        else:
+            if math.isfinite(value) and value > 0:
+                return value
+            print("Please enter a number greater than zero.")
+
+
 def add_product(inventory: Inventory) -> None:
     print("\nAdd New Product")
     product_id = input("Product ID: ").strip().upper()
@@ -82,8 +123,8 @@ def add_product(inventory: Inventory) -> None:
         return
 
     field, prompt = details[product_type]
+    price = get_positive_float("Price: ")
     try:
-        price = float(input("Price: "))
         stock = int(input("Stock Quantity: "))
         extra = float(input(prompt))
         if not math.isfinite(extra) or extra < 0:
@@ -141,10 +182,15 @@ def create_order(inventory: Inventory) -> None:
     print(f"Total: ${order.calculate_total():.2f}")
 
 
+def import_products(inventory: Inventory) -> None:
+    path = input("Products CSV [products.csv]: ").strip() or "products.csv"
+    load_products(path, inventory, Supplier("UNKNOWN", "Unknown", ""))
+
+
 def display_menu() -> None:
     print("\n----------- MENU -----------")
     print("1. Display All Products\n2. Add Product\n3. Update Stock")
-    print("4. Search Product\n5. Save Inventory\n6. Exit\n7. Create Order")
+    print("4. Search Product\n5. Save Inventory\n6. Exit\n7. Create Order\n8. Import Products CSV")
     print("----------------------------")
 
 
@@ -153,7 +199,11 @@ def main() -> None:
     print("INVENTORY MANAGEMENT SYSTEM")
     print("=" * 40)
     inventory = Inventory()
-    load_inventory(inventory)
+    try:
+        load_inventory(inventory)
+    except (OSError, TypeError, ValueError, KeyError) as error:
+        print(f"Could not load {INVENTORY_FILE}: {error}")
+        return
 
     actions = {
         "1": inventory.display_all,
@@ -161,6 +211,7 @@ def main() -> None:
         "3": lambda: update_stock(inventory),
         "4": lambda: search_product(inventory),
         "7": lambda: create_order(inventory),
+        "8": lambda: import_products(inventory),
     }
     while True:
         display_menu()
@@ -175,7 +226,7 @@ def main() -> None:
             print("\nInventory saved. Thank you for using Inventory Management System.")
             break
         else:
-            print("\nInvalid option. Please enter a number from 1 to 7.")
+            print("\nInvalid option. Please enter a number from 1 to 8.")
 
 
 if __name__ == "__main__":
