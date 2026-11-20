@@ -2,14 +2,14 @@ import unittest
 
 from discount_strategy import BulkDiscount, DiscountStrategy, PercentageDiscount, StudentDiscount
 from order import Order
-from physical_product import PhysicalProduct
+from product_factory import ProductFactory
 from supplier import Supplier
 
 
 class DiscountTests(unittest.TestCase):
     def setUp(self):
         supplier = Supplier("S1", "Supplier", "supplier@example.com")
-        self.product = PhysicalProduct("P1", "Lamp", 50.0, 10, supplier, 1.0)
+        self.product = ProductFactory.create("physical", "P1", "Lamp", 50.0, 10, supplier, weight=1.0)
 
     def test_default_and_swappable_discounts(self):
         order = Order("O1")

@@ -7,6 +7,7 @@ from order import Order
 from digital_product import DigitalProduct
 from physical_product import PhysicalProduct
 from product import Product
+from product_factory import ProductFactory
 from supplier import Supplier
 
 INVENTORY_FILE = "inventory.json"
@@ -21,12 +22,10 @@ def load_inventory(inventory: Inventory) -> None:
         for item in json.load(file):
             supplier_data = item.get("supplier", {"id": "UNKNOWN", "name": "Unknown", "contact_email": ""})
             supplier = Supplier(supplier_data["id"], supplier_data["name"], supplier_data["contact_email"])
-            if item["type"] == "physical":
-                product = PhysicalProduct(item["id"], item["name"], item["price"], item["stock"], supplier, item["weight"])
-            elif item["type"] == "digital":
-                product = DigitalProduct(item["id"], item["name"], item["price"], item["stock"], supplier, item["download_size"])
-            else:
-                raise ValueError(f"Unknown product type: {item['type']}")
+            details = {key: item[key] for key in ("weight", "download_size") if key in item}
+            product = ProductFactory.create(
+                item["type"], item["id"], item["name"], item["price"], item["stock"], supplier, **details
+            )
             if not inventory.add_product(product):
                 raise ValueError(f"Duplicate product ID: {product.product_id}")
     print(f"{INVENTORY_FILE} loaded successfully.")
@@ -70,29 +69,31 @@ def add_product(inventory: Inventory) -> None:
         return
 
     product_type = input("Product type (physical/digital): ").strip().lower()
-    if product_type not in ("physical", "digital"):
+    details = {"physical": ("weight", "Weight (kg): "), "digital": ("download_size", "Download size (MB): ")}
+    if product_type not in details:
         print("\nInvalid product type.")
         return
     name = input("Product Name: ").strip()
     supplier_id = input("Supplier ID: ").strip()
     supplier_name = input("Supplier Name: ").strip()
     supplier_email = input("Supplier Email: ").strip()
+    if not all((product_id, name, supplier_id, supplier_name, supplier_email)):
+        print("\nProduct and supplier details are required.")
+        return
+
+    field, prompt = details[product_type]
     try:
         price = float(input("Price: "))
         stock = int(input("Stock Quantity: "))
-        if product_type == "physical":
-            extra = float(input("Weight (kg): "))
-        else:
-            extra = float(input("Download size (MB): "))
-    except ValueError:
-        print("\nInvalid numeric value.")
+        extra = float(input(prompt))
+        if not math.isfinite(extra) or extra < 0:
+            raise ValueError("Weight or download size must be finite and non-negative.")
+        supplier = Supplier(supplier_id, supplier_name, supplier_email)
+        product = ProductFactory.create(product_type, product_id, name, price, stock, supplier, **{field: extra})
+    except ValueError as error:
+        print(f"\nInvalid product details: {error}")
         return
-    if not product_id or not name or not supplier_id or not supplier_name or not supplier_email or not math.isfinite(price) or not math.isfinite(extra) or price < 0 or stock < 0 or extra < 0:
-        print("\nProduct details must be valid and non-negative.")
-        return
-
-    product_class = PhysicalProduct if product_type == "physical" else DigitalProduct
-    inventory.add_product(product_class(product_id, name, price, stock, Supplier(supplier_id, supplier_name, supplier_email), extra))
+    inventory.add_product(product)
     print("\nProduct added successfully!")
 
 

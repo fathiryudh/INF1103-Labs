@@ -1,14 +1,17 @@
 from abc import ABC, abstractmethod
+from math import isfinite
 
 from supplier import Supplier
 
 
 class Product(ABC):
     def __init__(self, product_id: str, name: str, price: float, stock: int, supplier: Supplier) -> None:
+        if not isfinite(price) or price <= 0:
+            raise ValueError("Price must be greater than zero and finite.")
+        self.update_stock(stock)
         self.__product_id = product_id
         self.__name = name
         self.__price = price
-        self.__stock = stock
         self.supplier: Supplier = supplier
 
     @property
@@ -28,7 +31,7 @@ class Product(ABC):
         return self.__stock
 
     def update_stock(self, quantity: int) -> None:
-        if not isinstance(quantity, int) or quantity < 0:
+        if not isinstance(quantity, int) or isinstance(quantity, bool) or quantity < 0:
             raise ValueError("Stock quantity must be a non-negative integer.")
         self.__stock = quantity
 

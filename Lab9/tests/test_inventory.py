@@ -11,6 +11,7 @@ from order import Order
 from digital_product import DigitalProduct
 from physical_product import PhysicalProduct
 from product import Product
+from product_factory import ProductFactory
 from supplier import Supplier
 
 
@@ -22,8 +23,8 @@ def show_product_details(product: Product) -> None:
 class RelationshipTests(unittest.TestCase):
     def setUp(self):
         supplier = Supplier('S1', 'Supplier', 'supplier@example.com')
-        self.physical = PhysicalProduct('P1', 'Book', 10.0, 5, supplier, 2.0)
-        self.digital = DigitalProduct('D1', 'App', 4.0, 3, supplier, 100.0)
+        self.physical = ProductFactory.create('physical', 'P1', 'Book', 10.0, 5, supplier, weight=2.0)
+        self.digital = ProductFactory.create('digital', 'D1', 'App', 4.0, 3, supplier, download_size=100.0)
 
     def test_association_and_aggregation(self):
         supplier = self.physical.supplier
